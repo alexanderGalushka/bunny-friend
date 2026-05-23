@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bunny Friend</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Forest backdrop -->
+  <svg id="forest" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+    <!-- Sky -->
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#bfe9ff"/>
+        <stop offset="100%" stop-color="#e9f8e2"/>
+      </linearGradient>
+      <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#fff4b3"/>
+        <stop offset="100%" stop-color="#ffd966"/>
+      </radialGradient>
+    </defs>
+    <rect x="0" y="0" width="1200" height="700" fill="url(#sky)"/>
+
+    <!-- Sun -->
+    <circle cx="990" cy="120" r="55" fill="url(#sun)"/>
+
+    <!-- Clouds -->
+    <g fill="#ffffff" opacity="0.9">
+      <ellipse cx="180" cy="110" rx="55" ry="18"/>
+      <ellipse cx="220" cy="95" rx="40" ry="20"/>
+      <ellipse cx="260" cy="115" rx="50" ry="16"/>
+
+      <ellipse cx="700" cy="80" rx="50" ry="16"/>
+      <ellipse cx="740" cy="95" rx="38" ry="18"/>
+    </g>
+
+    <!-- Distant hills -->
+    <path d="M 0 500 Q 200 380 400 460 T 800 440 T 1200 470 L 1200 700 L 0 700 Z" fill="#9ed79b"/>
+
+    <!-- Back row trees (pines, smaller and lighter) -->
+    <g>
+      <g transform="translate(60,330)">
+        <rect x="-6" y="120" width="12" height="40" fill="#6b4226"/>
+        <polygon points="-40,120 40,120 0,40" fill="#3f8a4c"/>
+        <polygon points="-32,80 32,80 0,10" fill="#3f8a4c"/>
+      </g>
+      <g transform="translate(180,350)">
+        <rect x="-6" y="120" width="12" height="40" fill="#6b4226"/>
+        <polygon points="-40,120 40,120 0,40" fill="#4ea35d"/>
+        <polygon points="-32,80 32,80 0,10" fill="#4ea35d"/>
+      </g>
+      <g transform="translate(450,340)">
+        <rect x="-6" y="120" width="12" height="40" fill="#6b4226"/>
+        <polygon points="-40,120 40,120 0,40" fill="#3f8a4c"/>
+        <polygon points="-32,80 32,80 0,10" fill="#3f8a4c"/>
+      </g>
+      <g transform="translate(820,345)">
+        <rect x="-6" y="120" width="12" height="40" fill="#6b4226"/>
+        <polygon points="-40,120 40,120 0,40" fill="#4ea35d"/>
+        <polygon points="-32,80 32,80 0,10" fill="#4ea35d"/>
+      </g>
+      <g transform="translate(1100,335)">
+        <rect x="-6" y="120" width="12" height="40" fill="#6b4226"/>
+        <polygon points="-40,120 40,120 0,40" fill="#3f8a4c"/>
+        <polygon points="-32,80 32,80 0,10" fill="#3f8a4c"/>
+      </g>
+    </g>
+
+    <!-- Front row trees (bigger leafy trees) -->
+    <g>
+      <g transform="translate(120,470)">
+        <rect x="-14" y="0" width="28" height="100" fill="#6b4226"/>
+        <circle cx="0" cy="-20" r="65" fill="#2f7d3b"/>
+        <circle cx="-45" cy="0" r="48" fill="#37923f"/>
+        <circle cx="45" cy="0" r="48" fill="#37923f"/>
+      </g>
+      <g transform="translate(1080,470)">
+        <rect x="-14" y="0" width="28" height="100" fill="#6b4226"/>
+        <circle cx="0" cy="-20" r="65" fill="#2f7d3b"/>
+        <circle cx="-45" cy="0" r="48" fill="#37923f"/>
+        <circle cx="45" cy="0" r="48" fill="#37923f"/>
+      </g>
+    </g>
+
+    <!-- Grass foreground -->
+    <path d="M 0 560 Q 300 520 600 555 T 1200 555 L 1200 700 L 0 700 Z" fill="#5fbf5f"/>
+
+    <!-- Bushes near the bunny area -->
+    <g>
+      <g transform="translate(280,610)">
+        <ellipse cx="0" cy="0" rx="55" ry="28" fill="#3f9b4d"/>
+        <ellipse cx="-30" cy="-10" rx="25" ry="18" fill="#4cb05b"/>
+        <ellipse cx="25" cy="-12" rx="28" ry="20" fill="#4cb05b"/>
+      </g>
+      <g transform="translate(920,615)">
+        <ellipse cx="0" cy="0" rx="60" ry="30" fill="#3f9b4d"/>
+        <ellipse cx="-32" cy="-12" rx="26" ry="20" fill="#4cb05b"/>
+        <ellipse cx="28" cy="-14" rx="30" ry="22" fill="#4cb05b"/>
+      </g>
+    </g>
+
+    <!-- Little flowers -->
+    <g>
+      <g transform="translate(360,640)">
+        <circle cx="0" cy="0" r="5" fill="#ffd1dc"/>
+        <circle cx="-6" cy="-3" r="4" fill="#ffd1dc"/>
+        <circle cx="6" cy="-3" r="4" fill="#ffd1dc"/>
+        <circle cx="0" cy="0" r="2" fill="#ffe066"/>
+      </g>
+      <g transform="translate(820,650)">
+        <circle cx="0" cy="0" r="5" fill="#ffffff"/>
+        <circle cx="-6" cy="-3" r="4" fill="#ffffff"/>
+        <circle cx="6" cy="-3" r="4" fill="#ffffff"/>
+        <circle cx="0" cy="0" r="2" fill="#ffe066"/>
+      </g>
+      <g transform="translate(600,665)">
+        <circle cx="0" cy="0" r="5" fill="#ffb3ff"/>
+        <circle cx="-6" cy="-3" r="4" fill="#ffb3ff"/>
+        <circle cx="6" cy="-3" r="4" fill="#ffb3ff"/>
+        <circle cx="0" cy="0" r="2" fill="#ffe066"/>
+      </g>
+    </g>
+  </svg>
+
+  <h1>Click the Bunny!</h1>
+  <p class="hint">Try the ears, the nose, the paws, and the belly.</p>
+
+  <div class="stage">
+    <div id="bubble" class="bubble hidden"></div>
+
+    <svg id="bunny" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+      <!-- Left ear -->
+      <g class="part" data-part="ear">
+        <ellipse cx="140" cy="90" rx="28" ry="80" fill="#ffffff" stroke="#333" stroke-width="3"/>
+        <ellipse cx="140" cy="100" rx="12" ry="55" fill="#ffc0cb"/>
+      </g>
+
+      <!-- Right ear -->
+      <g class="part" data-part="ear">
+        <ellipse cx="260" cy="90" rx="28" ry="80" fill="#ffffff" stroke="#333" stroke-width="3"/>
+        <ellipse cx="260" cy="100" rx="12" ry="55" fill="#ffc0cb"/>
+      </g>
+
+      <!-- Body (belly) -->
+      <g class="part" data-part="belly">
+        <ellipse cx="200" cy="370" rx="120" ry="110" fill="#ffffff" stroke="#333" stroke-width="3"/>
+        <ellipse cx="200" cy="390" rx="70" ry="75" fill="#fff0f3"/>
+      </g>
+
+      <!-- Head -->
+      <circle cx="200" cy="230" r="90" fill="#ffffff" stroke="#333" stroke-width="3"/>
+
+      <!-- Cheeks -->
+      <circle cx="150" cy="250" r="14" fill="#ffd1dc"/>
+      <circle cx="250" cy="250" r="14" fill="#ffd1dc"/>
+
+      <!-- Eyes -->
+      <circle cx="170" cy="215" r="9" fill="#222"/>
+      <circle cx="230" cy="215" r="9" fill="#222"/>
+      <circle cx="173" cy="212" r="3" fill="#fff"/>
+      <circle cx="233" cy="212" r="3" fill="#fff"/>
+
+      <!-- Nose -->
+      <g class="part" data-part="nose">
+        <path d="M 200 245 L 188 255 L 200 268 L 212 255 Z" fill="#ff6b9d" stroke="#333" stroke-width="2"/>
+      </g>
+
+      <!-- Mouth -->
+      <path d="M 200 268 Q 190 282 180 275" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M 200 268 Q 210 282 220 275" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+      <!-- Left paw -->
+      <g class="part" data-part="paw">
+        <ellipse cx="125" cy="460" rx="35" ry="22" fill="#ffffff" stroke="#333" stroke-width="3"/>
+        <circle cx="115" cy="455" r="4" fill="#ffc0cb"/>
+        <circle cx="128" cy="450" r="4" fill="#ffc0cb"/>
+        <circle cx="141" cy="455" r="4" fill="#ffc0cb"/>
+      </g>
+
+      <!-- Right paw -->
+      <g class="part" data-part="paw">
+        <ellipse cx="275" cy="460" rx="35" ry="22" fill="#ffffff" stroke="#333" stroke-width="3"/>
+        <circle cx="259" cy="455" r="4" fill="#ffc0cb"/>
+        <circle cx="272" cy="450" r="4" fill="#ffc0cb"/>
+        <circle cx="285" cy="455" r="4" fill="#ffc0cb"/>
+      </g>
+
+      <!-- Tail -->
+      <circle cx="320" cy="380" r="22" fill="#ffffff" stroke="#333" stroke-width="3"/>
+    </svg>
+  </div>
+
+  <script src="bunny.js"></script>
+</body>
+</html>
