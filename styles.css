@@ -19,7 +19,7 @@ body {
 
 h1 {
   margin-top: 20px;
-  font-size: 2.2rem;
+  font-size: 2.8rem;
   color: #6a3ea1;
   text-shadow: 2px 2px 0 #fff;
   position: relative;
@@ -27,7 +27,7 @@ h1 {
 }
 
 .hint {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   margin-bottom: 10px;
   color: #555;
   position: relative;
@@ -36,18 +36,18 @@ h1 {
 
 .stage {
   position: relative;
-  width: 420px;
-  height: 540px;
+  width: min(700px, 90vw);
+  height: calc(min(700px, 90vw) * 540 / 420);
   margin: 0 auto;
   z-index: 1;
 }
 
 #bunny {
-  width: 400px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
   transition: transform 0.4s ease-in-out;
   cursor: pointer;
-  filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.18));
 }
 
 .part {
@@ -69,9 +69,9 @@ h1 {
   background: #fff;
   border: 3px solid #6a3ea1;
   border-radius: 18px;
-  padding: 12px 18px;
-  max-width: 320px;
-  font-size: 1.05rem;
+  padding: 14px 22px;
+  max-width: 380px;
+  font-size: 1.2rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   z-index: 10;
 }
@@ -112,4 +112,86 @@ h1 {
   50%  { transform: translateX(60px)  translateY(0); }
   75%  { transform: translateX(30px)  translateY(-25px); }
   100% { transform: translateX(0)   translateY(0); }
+}
+
+/* ── Rainbow Color Card ── */
+#color-card {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 28%;
+  max-width: 210px;
+  min-width: 130px;
+  aspect-ratio: 2 / 3;
+  border-radius: 20px;
+  border: 5px solid rgba(255, 255, 255, 0.92);
+  z-index: 30;
+  pointer-events: none;
+  box-shadow: 0 14px 48px rgba(0, 0, 0, 0.42), inset 0 0 28px rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.card-emoji {
+  font-size: 3.5rem;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+  pointer-events: none;
+  user-select: none;
+}
+
+#color-card.pop-card {
+  animation: cardLife 5s ease-in-out forwards;
+}
+
+@keyframes cardLife {
+  /* pop in */
+  0%   { transform:translate(-50%,-50%) scale(0)    rotate(-15deg); opacity:0; background:hsl(0,90%,60%); }
+  7%   { transform:translate(-50%,-50%) scale(1.18) rotate(6deg);   opacity:1; background:hsl(25,90%,60%); }
+  12%  { transform:translate(-50%,-50%) scale(0.94) rotate(-3deg);  opacity:1; background:hsl(50,88%,58%); }
+  16%  { transform:translate(-50%,-50%) scale(1.02) rotate(1deg);   opacity:1; background:hsl(80,82%,55%); }
+  20%  { transform:translate(-50%,-50%) scale(1)    rotate(0deg);   opacity:1; background:hsl(120,80%,52%); }
+  /* color cycling */
+  28%  { background:hsl(160,80%,52%); opacity:1; transform:translate(-50%,-50%) scale(1) rotate(0deg); }
+  36%  { background:hsl(200,82%,58%); opacity:1; transform:translate(-50%,-50%) scale(1) rotate(0deg); }
+  44%  { background:hsl(240,80%,65%); opacity:1; transform:translate(-50%,-50%) scale(1) rotate(0deg); }
+  52%  { background:hsl(270,80%,65%); opacity:1; transform:translate(-50%,-50%) scale(1) rotate(0deg); }
+  60%  { background:hsl(300,82%,62%); opacity:1; transform:translate(-50%,-50%) scale(1) rotate(0deg); }
+  68%  { background:hsl(330,85%,62%); opacity:1; transform:translate(-50%,-50%) scale(1) rotate(0deg); }
+  76%  { background:hsl(0,90%,60%);   opacity:1; transform:translate(-50%,-50%) scale(1) rotate(0deg); }
+  84%  { background:hsl(45,90%,58%);  opacity:1; transform:translate(-50%,-50%) scale(1) rotate(0deg); }
+  /* pop out */
+  90%  { transform:translate(-50%,-50%) scale(1.06) rotate(3deg); opacity:1; background:hsl(100,80%,55%); }
+  100% { transform:translate(-50%,-50%) scale(0)    rotate(20deg); opacity:0; background:hsl(200,80%,60%); }
+}
+
+/* ── Carrot surprise (bottom) ── */
+#carrot {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  font-size: 6rem;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+  transform: translateX(-50%) scale(0);
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.22));
+  line-height: 1;
+}
+
+#carrot.pop {
+  animation: carrotPop 10s ease-out forwards;
+}
+
+@keyframes carrotPop {
+  0%   { transform: translateX(-50%) translateY(0)    scale(0)    rotate(-25deg); opacity: 0; }
+  8%   { transform: translateX(-50%) translateY(-40px) scale(1.4) rotate(8deg);   opacity: 1; }
+  14%  { transform: translateX(-50%) translateY(-10px) scale(0.92) rotate(-4deg); opacity: 1; }
+  18%  { transform: translateX(-50%) translateY(-22px) scale(1.06) rotate(2deg);  opacity: 1; }
+  22%  { transform: translateX(-50%) translateY(-18px) scale(1)    rotate(0deg);  opacity: 1; }
+  80%  { transform: translateX(-50%) translateY(-18px) scale(1)    rotate(0deg);  opacity: 1; }
+  100% { transform: translateX(-50%) translateY(-60px) scale(0)    rotate(22deg); opacity: 0; }
 }

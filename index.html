@@ -128,66 +128,228 @@
   <div class="stage">
     <div id="bubble" class="bubble hidden"></div>
 
-    <svg id="bunny" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-      <!-- Left ear -->
+    <svg id="bunny" viewBox="0 0 400 510" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="bodyGrad" cx="38%" cy="28%" r="72%">
+          <stop offset="0%"   stop-color="#eee7de"/>
+          <stop offset="55%"  stop-color="#d5cab8"/>
+          <stop offset="100%" stop-color="#a89888"/>
+        </radialGradient>
+        <radialGradient id="headGrad" cx="42%" cy="30%" r="70%">
+          <stop offset="0%"   stop-color="#f4ede5"/>
+          <stop offset="52%"  stop-color="#ddd2c5"/>
+          <stop offset="100%" stop-color="#b5a595"/>
+        </radialGradient>
+        <radialGradient id="bellyGrad" cx="50%" cy="42%" r="58%">
+          <stop offset="0%"   stop-color="#faf8f4"/>
+          <stop offset="100%" stop-color="#e6ddd2"/>
+        </radialGradient>
+        <radialGradient id="muzzleGrad" cx="50%" cy="38%" r="60%">
+          <stop offset="0%"   stop-color="#f6f1ec"/>
+          <stop offset="100%" stop-color="#ddd4c8"/>
+        </radialGradient>
+        <linearGradient id="earGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#c5bdb2"/>
+          <stop offset="45%"  stop-color="#dcd4c8"/>
+          <stop offset="100%" stop-color="#b8b0a5"/>
+        </linearGradient>
+        <linearGradient id="innerEarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#e090a8"/>
+          <stop offset="50%"  stop-color="#f0b0c0"/>
+          <stop offset="100%" stop-color="#d87898"/>
+        </linearGradient>
+        <radialGradient id="irisGrad" cx="35%" cy="28%" r="72%">
+          <stop offset="0%"   stop-color="#7a5040"/>
+          <stop offset="65%"  stop-color="#3c1e10"/>
+          <stop offset="100%" stop-color="#150805"/>
+        </radialGradient>
+        <radialGradient id="noseGrad" cx="38%" cy="32%" r="68%">
+          <stop offset="0%"   stop-color="#e87888"/>
+          <stop offset="100%" stop-color="#b84858"/>
+        </radialGradient>
+        <radialGradient id="pawGrad" cx="40%" cy="32%" r="68%">
+          <stop offset="0%"   stop-color="#ece4da"/>
+          <stop offset="100%" stop-color="#bfaf9e"/>
+        </radialGradient>
+        <radialGradient id="tailGrad" cx="36%" cy="32%" r="68%">
+          <stop offset="0%"   stop-color="#f8f5f0"/>
+          <stop offset="100%" stop-color="#c5bdb2"/>
+        </radialGradient>
+        <radialGradient id="neckShadow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="#8a7a6a" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#8a7a6a" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- ── TAIL (drawn first so body overlaps it) ── -->
+      <circle cx="316" cy="422" r="26" fill="url(#tailGrad)" stroke="#c0b5a8" stroke-width="1.2"/>
+      <!-- fluffy fur lines on tail -->
+      <path d="M 302,410 C 306,404 314,402 318,405" stroke="#e8e2da" stroke-width="0.9" fill="none" opacity="0.7"/>
+      <path d="M 300,422 C 304,416 312,415 316,418" stroke="#e8e2da" stroke-width="0.9" fill="none" opacity="0.6"/>
+
+      <!-- ── EARS (paths — base sits inside head so connection is seamless) ── -->
       <g class="part" data-part="ear">
-        <ellipse cx="140" cy="90" rx="28" ry="80" fill="#ffffff" stroke="#333" stroke-width="3"/>
-        <ellipse cx="140" cy="100" rx="12" ry="55" fill="#ffc0cb"/>
+        <!-- left ear outer -->
+        <path d="M 148,140 C 136,108 108,60 110,22 C 111,8 124,2 140,6 C 156,2 168,8 168,22 C 168,62 162,108 176,140 Z"
+              fill="url(#earGrad)" stroke="#a09080" stroke-width="1.5"/>
+        <!-- left ear inner pink -->
+        <path d="M 151,134 C 141,106 118,66 120,28 C 122,16 131,12 140,14 C 149,12 158,18 157,30 C 156,68 155,108 170,132 Z"
+              fill="url(#innerEarGrad)"/>
+        <!-- left ear tip shading -->
+        <ellipse cx="139" cy="12" rx="18" ry="10" fill="#9a8e82" opacity="0.25"/>
+      </g>
+      <g class="part" data-part="ear">
+        <!-- right ear outer (mirror of left) -->
+        <path d="M 252,140 C 264,108 292,60 290,22 C 289,8 276,2 260,6 C 244,2 232,8 232,22 C 232,62 238,108 224,140 Z"
+              fill="url(#earGrad)" stroke="#a09080" stroke-width="1.5"/>
+        <!-- right ear inner pink -->
+        <path d="M 249,134 C 259,106 282,66 280,28 C 278,16 269,12 260,14 C 251,12 242,18 243,30 C 244,68 245,108 230,132 Z"
+              fill="url(#innerEarGrad)"/>
+        <!-- right ear tip shading -->
+        <ellipse cx="261" cy="12" rx="18" ry="10" fill="#9a8e82" opacity="0.25"/>
       </g>
 
-      <!-- Right ear -->
-      <g class="part" data-part="ear">
-        <ellipse cx="260" cy="90" rx="28" ry="80" fill="#ffffff" stroke="#333" stroke-width="3"/>
-        <ellipse cx="260" cy="100" rx="12" ry="55" fill="#ffc0cb"/>
-      </g>
-
-      <!-- Body (belly) -->
+      <!-- ── BODY ── -->
       <g class="part" data-part="belly">
-        <ellipse cx="200" cy="370" rx="120" ry="110" fill="#ffffff" stroke="#333" stroke-width="3"/>
-        <ellipse cx="200" cy="390" rx="70" ry="75" fill="#fff0f3"/>
+        <path d="M 150,308
+                 C 116,320 78,360 78,405
+                 C 78,456 116,494 200,498
+                 C 284,494 322,456 322,405
+                 C 322,360 284,320 250,308 Z"
+              fill="url(#bodyGrad)" stroke="#a09080" stroke-width="1.5"/>
+        <!-- belly highlight -->
+        <ellipse cx="200" cy="418" rx="84" ry="70" fill="url(#bellyGrad)"/>
+        <!-- subtle body fur strokes -->
+        <path d="M 104,374 C 108,362 118,356 125,360" stroke="#c8bfb5" stroke-width="0.9" fill="none" opacity="0.55"/>
+        <path d="M 288,372 C 285,360 275,354 268,358" stroke="#c8bfb5" stroke-width="0.9" fill="none" opacity="0.55"/>
+        <path d="M 118,430 C 122,420 130,416 136,419" stroke="#c8bfb5" stroke-width="0.9" fill="none" opacity="0.45"/>
       </g>
 
-      <!-- Head -->
-      <circle cx="200" cy="230" r="90" fill="#ffffff" stroke="#333" stroke-width="3"/>
+      <!-- ── REAR FEET (flat on ground at bottom of body) ── -->
+      <g class="part" data-part="paw">
+        <ellipse cx="163" cy="472" rx="44" ry="22" fill="url(#pawGrad)" stroke="#a09080" stroke-width="1.5"/>
+        <path d="M 138,462 C 136,454 140,449 144,450" stroke="#bfafa0" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M 157,458 C 156,450 159,446 163,447" stroke="#bfafa0" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M 177,462 C 178,454 181,450 184,452" stroke="#bfafa0" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="part" data-part="paw">
+        <ellipse cx="237" cy="472" rx="44" ry="22" fill="url(#pawGrad)" stroke="#a09080" stroke-width="1.5"/>
+        <path d="M 216,462 C 214,454 217,449 221,450" stroke="#bfafa0" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M 232,458 C 231,450 235,446 239,447" stroke="#bfafa0" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M 252,462 C 253,454 256,450 259,452" stroke="#bfafa0" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </g>
 
-      <!-- Cheeks -->
-      <circle cx="150" cy="250" r="14" fill="#ffd1dc"/>
-      <circle cx="250" cy="250" r="14" fill="#ffd1dc"/>
+      <!-- ── FRONT PAWS / ARMS ── -->
+      <!-- left: toe ovals drawn first (behind arm), then arm on top so toes peek out below -->
+      <g class="part" data-part="front-paw">
+        <ellipse cx="142" cy="432" rx="12" ry="14" fill="url(#pawGrad)" stroke="#a09080" stroke-width="1.2"/>
+        <ellipse cx="158" cy="436" rx="12" ry="14" fill="url(#pawGrad)" stroke="#a09080" stroke-width="1.2"/>
+        <ellipse cx="174" cy="432" rx="12" ry="14" fill="url(#pawGrad)" stroke="#a09080" stroke-width="1.2"/>
+        <!-- forearm body -->
+        <path d="M 131,380
+                 C 129,360 135,341 145,334
+                 C 150,330 156,328 158,328
+                 C 160,328 166,330 171,334
+                 C 181,341 187,360 185,380
+                 C 187,399 185,416 184,424
+                 L 132,424
+                 C 131,416 129,399 131,380 Z"
+              fill="url(#pawGrad)" stroke="#a09080" stroke-width="1.5"/>
+        <!-- upper highlight -->
+        <ellipse cx="151" cy="356" rx="14" ry="10" fill="white" opacity="0.18"/>
+        <!-- crease where arm meets toes -->
+        <path d="M 132,422 C 140,417 176,417 184,422" stroke="#a09080" stroke-width="1" fill="none" opacity="0.5"/>
+        <!-- subtle pad shadow -->
+        <ellipse cx="158" cy="421" rx="20" ry="7" fill="#b0a090" opacity="0.18"/>
+      </g>
 
-      <!-- Eyes -->
-      <circle cx="170" cy="215" r="9" fill="#222"/>
-      <circle cx="230" cy="215" r="9" fill="#222"/>
-      <circle cx="173" cy="212" r="3" fill="#fff"/>
-      <circle cx="233" cy="212" r="3" fill="#fff"/>
+      <!-- right: same mirrored -->
+      <g class="part" data-part="front-paw">
+        <ellipse cx="226" cy="432" rx="12" ry="14" fill="url(#pawGrad)" stroke="#a09080" stroke-width="1.2"/>
+        <ellipse cx="242" cy="436" rx="12" ry="14" fill="url(#pawGrad)" stroke="#a09080" stroke-width="1.2"/>
+        <ellipse cx="258" cy="432" rx="12" ry="14" fill="url(#pawGrad)" stroke="#a09080" stroke-width="1.2"/>
+        <path d="M 215,380
+                 C 213,360 219,341 229,334
+                 C 234,330 240,328 242,328
+                 C 244,328 250,330 255,334
+                 C 265,341 271,360 269,380
+                 C 271,399 269,416 268,424
+                 L 216,424
+                 C 215,416 213,399 215,380 Z"
+              fill="url(#pawGrad)" stroke="#a09080" stroke-width="1.5"/>
+        <ellipse cx="233" cy="356" rx="14" ry="10" fill="white" opacity="0.18"/>
+        <path d="M 216,422 C 224,417 260,417 268,422" stroke="#a09080" stroke-width="1" fill="none" opacity="0.5"/>
+        <ellipse cx="242" cy="421" rx="20" ry="7" fill="#b0a090" opacity="0.18"/>
+      </g>
 
-      <!-- Nose -->
+      <!-- neck shadow for depth -->
+      <ellipse cx="200" cy="310" rx="56" ry="16" fill="url(#neckShadow)"/>
+
+      <!-- ── HEAD ── -->
+      <circle cx="200" cy="215" r="100" fill="url(#headGrad)" stroke="#a09080" stroke-width="1.5"/>
+
+      <!-- forehead glow -->
+      <ellipse cx="192" cy="148" rx="32" ry="22" fill="white" opacity="0.13"/>
+
+      <!-- head fur texture -->
+      <path d="M 160,148 C 163,138 172,134 178,137" stroke="#c8bfb5" stroke-width="0.9" fill="none" opacity="0.55"/>
+      <path d="M 228,145 C 232,136 241,132 246,136" stroke="#c8bfb5" stroke-width="0.9" fill="none" opacity="0.55"/>
+      <path d="M 186,128 C 189,118 197,114 202,117" stroke="#c8bfb5" stroke-width="0.9" fill="none" opacity="0.5"/>
+
+      <!-- ── MUZZLE ── -->
+      <ellipse cx="200" cy="268" rx="43" ry="29" fill="url(#muzzleGrad)"/>
+
+      <!-- ── EYES ── -->
+      <!-- left eye -->
+      <ellipse cx="165" cy="206" rx="21" ry="22" fill="#180c06"/>
+      <ellipse cx="165" cy="206" rx="17" ry="19" fill="url(#irisGrad)"/>
+      <ellipse cx="165" cy="209" rx="10" ry="14" fill="#060202"/>
+      <circle  cx="157" cy="199" r="5"   fill="white" opacity="0.95"/>
+      <circle  cx="170" cy="214" r="2.5" fill="white" opacity="0.5"/>
+      <path d="M 146,196 C 153,188 178,188 186,196" stroke="#38281a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- right eye -->
+      <ellipse cx="235" cy="206" rx="21" ry="22" fill="#180c06"/>
+      <ellipse cx="235" cy="206" rx="17" ry="19" fill="url(#irisGrad)"/>
+      <ellipse cx="235" cy="209" rx="10" ry="14" fill="#060202"/>
+      <circle  cx="227" cy="199" r="5"   fill="white" opacity="0.95"/>
+      <circle  cx="240" cy="214" r="2.5" fill="white" opacity="0.5"/>
+      <path d="M 214,196 C 222,188 247,188 255,196" stroke="#38281a" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+      <!-- cheek blush -->
+      <ellipse cx="147" cy="244" rx="19" ry="13" fill="#e0a0b0" opacity="0.32"/>
+      <ellipse cx="253" cy="244" rx="19" ry="13" fill="#e0a0b0" opacity="0.32"/>
+
+      <!-- ── NOSE ── -->
       <g class="part" data-part="nose">
-        <path d="M 200 245 L 188 255 L 200 268 L 212 255 Z" fill="#ff6b9d" stroke="#333" stroke-width="2"/>
+        <path d="M 200,256
+                 C 196,252 187,254 186,261
+                 C 185,268 193,273 200,273
+                 C 207,273 215,268 214,261
+                 C 213,254 204,252 200,256 Z"
+              fill="url(#noseGrad)" stroke="#905060" stroke-width="1"/>
+        <!-- nose highlight -->
+        <ellipse cx="195" cy="260" rx="4.5" ry="2.5" fill="white" opacity="0.38"/>
       </g>
 
-      <!-- Mouth -->
-      <path d="M 200 268 Q 190 282 180 275" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M 200 268 Q 210 282 220 275" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- ── MOUTH ── -->
+      <path d="M 200,273 L 200,284"                  stroke="#7a5858" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      <path d="M 200,284 Q 190,294 181,290"          stroke="#7a5858" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M 200,284 Q 210,294 219,290"          stroke="#7a5858" stroke-width="1.6" fill="none" stroke-linecap="round"/>
 
-      <!-- Left paw -->
-      <g class="part" data-part="paw">
-        <ellipse cx="125" cy="460" rx="35" ry="22" fill="#ffffff" stroke="#333" stroke-width="3"/>
-        <circle cx="115" cy="455" r="4" fill="#ffc0cb"/>
-        <circle cx="128" cy="450" r="4" fill="#ffc0cb"/>
-        <circle cx="141" cy="455" r="4" fill="#ffc0cb"/>
+      <!-- ── WHISKERS ── -->
+      <g stroke="#c0b8b0" stroke-width="1" opacity="0.72">
+        <line x1="184" y1="264" x2="125" y2="254"/>
+        <line x1="184" y1="269" x2="122" y2="269"/>
+        <line x1="184" y1="274" x2="127" y2="284"/>
+        <line x1="216" y1="264" x2="275" y2="254"/>
+        <line x1="216" y1="269" x2="278" y2="269"/>
+        <line x1="216" y1="274" x2="273" y2="284"/>
       </g>
 
-      <!-- Right paw -->
-      <g class="part" data-part="paw">
-        <ellipse cx="275" cy="460" rx="35" ry="22" fill="#ffffff" stroke="#333" stroke-width="3"/>
-        <circle cx="259" cy="455" r="4" fill="#ffc0cb"/>
-        <circle cx="272" cy="450" r="4" fill="#ffc0cb"/>
-        <circle cx="285" cy="455" r="4" fill="#ffc0cb"/>
-      </g>
-
-      <!-- Tail -->
-      <circle cx="320" cy="380" r="22" fill="#ffffff" stroke="#333" stroke-width="3"/>
     </svg>
+
+    <div id="color-card" class="hidden"><span class="card-emoji">🌈</span></div>
+    <div id="carrot" aria-hidden="true">🥕</div>
   </div>
 
   <script src="bunny.js"></script>

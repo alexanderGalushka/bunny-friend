@@ -1,5 +1,37 @@
-const bunny = document.getElementById("bunny");
-const bubble = document.getElementById("bubble");
+const bunny    = document.getElementById("bunny");
+const bubble   = document.getElementById("bubble");
+const carrotEl = document.getElementById("carrot");
+
+const carrotColors = [
+  ["hue-rotate(0deg)   saturate(1.5)",                         "🟠 A classic orange carrot!"],
+  ["hue-rotate(42deg)  saturate(3)   brightness(1.1)",         "✨ A golden carrot! So shiny!"],
+  ["hue-rotate(80deg)  saturate(2)",                           "🟡 A yellow carrot! Lemon-flavored?"],
+  ["hue-rotate(130deg) saturate(1.8)",                         "🟢 A green carrot! Extra healthy!"],
+  ["hue-rotate(175deg) saturate(2)",                           "🩵 A teal carrot! Minty fresh!"],
+  ["hue-rotate(215deg) saturate(2.2)",                         "🔵 A blue carrot! Never seen that before!"],
+  ["hue-rotate(255deg) saturate(2)",                           "🟣 A purple carrot! It must be magic!"],
+  ["hue-rotate(295deg) saturate(2.5)",                         "🩷 A pink carrot! So cute!"],
+  ["hue-rotate(330deg) saturate(2)   brightness(0.9)",         "❤️ A red carrot! Spicy!"],
+  ["saturate(0) brightness(0.15)",                             "⚫ A BLACK carrot... mysterious."],
+  ["saturate(0) brightness(2)",                                "🤍 A silver carrot! Very fancy!"],
+  ["hue-rotate(20deg)  saturate(4)   brightness(0.85)",        "🟤 A brown carrot! Earthy!"],
+  ["sepia(1) saturate(6) hue-rotate(15deg) brightness(1.3)",   "🌈 A RAINBOW carrot! Wow!"],
+];
+
+let carrotIndex = 0;
+
+function showCarrot() {
+  const [filter, message] = carrotColors[carrotIndex];
+  carrotIndex = (carrotIndex + 1) % carrotColors.length;
+
+  carrotEl.style.filter = `drop-shadow(0 6px 12px rgba(0,0,0,0.3)) ${filter}`;
+
+  carrotEl.classList.remove("pop");
+  void carrotEl.offsetWidth;
+  carrotEl.classList.add("pop");
+
+  showBubble(message);
+}
 
 const jokes = [
   "What do you call a bunny with fleas? Bugs Bunny!",
@@ -33,7 +65,6 @@ function pickRandom(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
-// Squeak sound using the Web Audio API (no audio files needed)
 let audioCtx = null;
 function squeak() {
   if (!audioCtx) {
@@ -53,30 +84,32 @@ function squeak() {
 }
 
 function hop() {
-  // alternate left and right each time
   hopDirection = 1 - hopDirection;
   const className = hopDirection === 0 ? "hop" : "hop-right";
   bunny.classList.remove("hop", "hop-right");
-  // force reflow so the animation restarts
   void bunny.offsetWidth;
   bunny.classList.add(className);
 }
 
-document.querySelectorAll(".part").forEach((part) => {
-  part.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const type = part.dataset.part;
-
-    if (type === "nose") {
-      squeak();
-      showBubble("Squeak! *boop*");
-    } else if (type === "ear") {
-      showBubble(pickRandom(jokes));
-    } else if (type === "paw") {
-      hop();
-      showBubble("Hop hop hop!");
-    } else if (type === "belly") {
-      showBubble(pickRandom(questions));
+bunny.addEventListener("click", (e) => {
+  let target = e.target;
+  while (target && target !== bunny) {
+    if (target.classList && target.classList.contains("part")) {
+      const type = target.dataset.part;
+      if (type === "nose") {
+        squeak();
+        showBubble("Squeak! *boop*");
+      } else if (type === "ear") {
+        showBubble(pickRandom(jokes));
+      } else if (type === "front-paw") {
+        showCarrot();
+      } else if (type === "paw") {
+        hop();
+      } else if (type === "belly") {
+        showBubble(pickRandom(questions));
+      }
+      break;
     }
-  });
+    target = target.parentElement;
+  }
 });
