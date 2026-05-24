@@ -1,3 +1,30 @@
+// ── Time-based background ──────────────────────────────────────────────────
+const BG_IMAGES = {
+  sunrise: "bunny-fluff-sunrise-background.png",
+  day:     "bunny-fluff-day-background.png",
+  sunset:  "bunny-fluff-sunset-background.png",
+  night:   "bunny-fluff-night-background.png",
+};
+
+function getTimePeriod() {
+  const h = new Date().getHours() + new Date().getMinutes() / 60;
+  if (h >= 5  && h < 8)  return "sunrise";
+  if (h >= 8  && h < 17) return "day";
+  if (h >= 17 && h < 21) return "sunset";
+  return "night";
+}
+
+function applyBackground() {
+  const period = getTimePeriod();
+  document.body.style.backgroundImage = `url('${BG_IMAGES[period]}')`;
+  document.body.classList.remove("time-sunrise", "time-day", "time-sunset", "time-night");
+  document.body.classList.add(`time-${period}`);
+}
+
+applyBackground();
+setInterval(applyBackground, 60_000);
+// ──────────────────────────────────────────────────────────────────────────
+
 const bunny    = document.getElementById("bunny");
 const bubble   = document.getElementById("bubble");
 const carrotEl = document.getElementById("carrot");
@@ -66,6 +93,40 @@ function pickRandom(list) {
 }
 
 let audioCtx = null;
+function fart() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const duration = 0.65;
+  const buf = audioCtx.createBuffer(1, Math.floor(audioCtx.sampleRate * duration), audioCtx.sampleRate);
+  const data = buf.getChannelData(0);
+  for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+
+  const src = audioCtx.createBufferSource();
+  src.buffer = buf;
+
+  const lp = audioCtx.createBiquadFilter();
+  lp.type = "lowpass";
+  lp.frequency.setValueAtTime(380, audioCtx.currentTime);
+  lp.frequency.exponentialRampToValueAtTime(55, audioCtx.currentTime + duration);
+
+  const gain = audioCtx.createGain();
+  gain.gain.setValueAtTime(0, audioCtx.currentTime);
+  gain.gain.linearRampToValueAtTime(1.3, audioCtx.currentTime + 0.04);
+  gain.gain.setValueAtTime(1.1, audioCtx.currentTime + 0.1);
+  gain.gain.linearRampToValueAtTime(0.7, audioCtx.currentTime + 0.25);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+  src.connect(lp).connect(gain).connect(audioCtx.destination);
+  src.start();
+  src.stop(audioCtx.currentTime + duration);
+}
+
+function showRainbowCloud() {
+  const fx = document.getElementById("fart-fx");
+  fx.classList.remove("boom");
+  void fx.getBoundingClientRect();
+  fx.classList.add("boom");
+}
+
 function squeak() {
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -107,6 +168,10 @@ bunny.addEventListener("click", (e) => {
         hop();
       } else if (type === "belly") {
         showBubble(pickRandom(questions));
+      } else if (type === "tail") {
+        fart();
+        showRainbowCloud();
+        showBubble("💨 *poot* 🌈");
       }
       break;
     }

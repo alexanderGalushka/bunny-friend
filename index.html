@@ -123,7 +123,7 @@
   </svg>
 
   <h1>Click the Bunny!</h1>
-  <p class="hint">Try the ears, the nose, the paws, and the belly.</p>
+  <p class="hint">Try the ears, the nose, the paws, the belly… and the tail. 🐰</p>
 
   <div class="stage">
     <div id="bubble" class="bubble hidden"></div>
@@ -182,10 +182,12 @@
       </defs>
 
       <!-- ── TAIL (drawn first so body overlaps it) ── -->
-      <circle cx="316" cy="422" r="26" fill="url(#tailGrad)" stroke="#c0b5a8" stroke-width="1.2"/>
-      <!-- fluffy fur lines on tail -->
-      <path d="M 302,410 C 306,404 314,402 318,405" stroke="#e8e2da" stroke-width="0.9" fill="none" opacity="0.7"/>
-      <path d="M 300,422 C 304,416 312,415 316,418" stroke="#e8e2da" stroke-width="0.9" fill="none" opacity="0.6"/>
+      <g class="part" data-part="tail">
+        <circle cx="316" cy="422" r="26" fill="url(#tailGrad)" stroke="#c0b5a8" stroke-width="1.2"/>
+        <!-- fluffy fur lines on tail -->
+        <path d="M 302,410 C 306,404 314,402 318,405" stroke="#e8e2da" stroke-width="0.9" fill="none" opacity="0.7"/>
+        <path d="M 300,422 C 304,416 312,415 316,418" stroke="#e8e2da" stroke-width="0.9" fill="none" opacity="0.6"/>
+      </g>
 
       <!-- ── EARS (paths — base sits inside head so connection is seamless) ── -->
       <g class="part" data-part="ear">
@@ -347,6 +349,56 @@
       </g>
 
     </svg>
+
+    <!-- ── RAINBOW FART CLOUD — positioned right of the tail ── -->
+    <div id="fart-fx">
+      <svg viewBox="0 0 220 210" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+        <defs>
+          <filter id="rbglow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- 7-band rainbow arcs, elliptical for nice proportions -->
+        <g filter="url(#rbglow)">
+          <path class="r-arc r1" d="M 10,200 A 100,86 0 0,1 210,200" stroke="#FF1111" stroke-width="12" fill="none" stroke-linecap="round"/>
+          <path class="r-arc r2" d="M 22,200 A 88,76 0 0,1 198,200"  stroke="#FF8800" stroke-width="12" fill="none" stroke-linecap="round"/>
+          <path class="r-arc r3" d="M 34,200 A 76,65 0 0,1 186,200"  stroke="#FFE500" stroke-width="12" fill="none" stroke-linecap="round"/>
+          <path class="r-arc r4" d="M 46,200 A 64,55 0 0,1 174,200"  stroke="#22CC44" stroke-width="12" fill="none" stroke-linecap="round"/>
+          <path class="r-arc r5" d="M 58,200 A 52,45 0 0,1 162,200"  stroke="#1166FF" stroke-width="12" fill="none" stroke-linecap="round"/>
+          <path class="r-arc r6" d="M 70,200 A 40,35 0 0,1 150,200"  stroke="#6611CC" stroke-width="12" fill="none" stroke-linecap="round"/>
+          <path class="r-arc r7" d="M 82,200 A 28,24 0 0,1 138,200"  stroke="#CC44CC" stroke-width="12" fill="none" stroke-linecap="round"/>
+        </g>
+
+        <!-- Rising gas wisps -->
+        <path class="wisp w1" d="M 95,177 Q 86,152 91,128 Q 96,104 89,82"  stroke="#77dd44" stroke-width="3"   fill="none" stroke-linecap="round"/>
+        <path class="wisp w2" d="M 117,177 Q 126,152 121,128 Q 116,104 123,82" stroke="#77dd44" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path class="wisp w3" d="M 106,175 Q 106,150 103,122 Q 100,94 106,68"  stroke="#99ee55" stroke-width="2"  fill="none" stroke-linecap="round"/>
+
+        <!-- Sparkles scattered around the rainbow -->
+        <text class="sp s1"  x="14"  y="108">✦</text>
+        <text class="sp s2"  x="194" y="118">✦</text>
+        <text class="sp s3"  x="108" y="15">★</text>
+        <text class="sp s4"  x="52"  y="56">✦</text>
+        <text class="sp s5"  x="154" y="50">✦</text>
+        <text class="sp s6"  x="80"  y="34">◆</text>
+        <text class="sp s7"  x="128" y="28">✦</text>
+        <text class="sp s8"  x="34"  y="80">✦</text>
+        <text class="sp s9"  x="175" y="84">✦</text>
+        <text class="sp s10" x="106" y="52">✦</text>
+
+        <!-- Gassy cloud puffs at the base -->
+        <ellipse class="c-puff cp1" cx="110" cy="198" rx="50" ry="17" fill="#dfffd4"/>
+        <ellipse class="c-puff cp2" cx="82"  cy="187" rx="32" ry="22" fill="#dfffd4"/>
+        <ellipse class="c-puff cp3" cx="138" cy="187" rx="32" ry="22" fill="#dfffd4"/>
+        <ellipse class="c-puff cp4" cx="110" cy="178" rx="34" ry="20" fill="#dfffd4"/>
+        <ellipse cx="110" cy="198" rx="50" ry="17" fill="none" stroke="#a8d8a0" stroke-width="1.5"/>
+        <ellipse cx="82"  cy="187" rx="32" ry="22" fill="none" stroke="#a8d8a0" stroke-width="1.5"/>
+        <ellipse cx="138" cy="187" rx="32" ry="22" fill="none" stroke="#a8d8a0" stroke-width="1.5"/>
+        <ellipse cx="110" cy="178" rx="34" ry="20" fill="none" stroke="#a8d8a0" stroke-width="1.5"/>
+      </svg>
+    </div>
 
     <div id="color-card" class="hidden"><span class="card-emoji">🌈</span></div>
     <div id="carrot" aria-hidden="true">🥕</div>
